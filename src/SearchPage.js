@@ -16,16 +16,19 @@ class SearchPage extends Component {
     searchErr: false
   }
 
-  getBooks = (event) => {
-    const query = event.target.value.trim()
-    this.setState({ query: query })
+  getBooks = event => {
+    const query = event.target.value;
+    this.setState({ query });
 
     if (query) {
-      BooksAPI.search(query, 10).then((books) => {
-        books.length > 0 ?  this.setState({newBooks: books, searchErr: false }) : this.setState({ searchErr: true })
-      })
-  } else this.setState({newBooks: [], searchErr: false })
-  }
+      BooksAPI.search(query.trim(), 20).then(books => {
+        books.length > 0
+          ? this.setState({ newBooks: books, searchErr: false })
+          : this.setState({ newBooks: [], searchErr: true });
+      });
+
+    } else this.setState({ newBooks: [], searchErr: false });
+  };
 
   render() {
     const { query, newBooks, searchErr } = this.state
