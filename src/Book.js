@@ -13,12 +13,27 @@ class Book extends Component {
     return (
           <li key={book.id}>
             <div className="book">
-              <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
+                <div className="book-top">
+                  { book.imageLinks && book.imageLinks.thumbnail && (
+                  <div
+                    className="book-cover"
+                    style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+                  </div>
+                )}
+                { (!book.imageLinks || !book.imageLinks.thumbnail) && (
+                  <div
+                    className="book-cover"
+                    style={{ width: 128, height: 188 }}>
+                  </div>
+                )}
                 <ShelfChanger Book={book}/>
               </div>
+              { book.title &&  (
                 <div className="book-title">{book.title}</div>
-              <div className="book-authors">{book.authors.join(", ")}</div>
+              )}
+              { book.authors && book.authors.map((author, index) => (
+                <div className="book-authors" key={index}>{author}</div>
+              ))}
             </div>
           </li>
     )
