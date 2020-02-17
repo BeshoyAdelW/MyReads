@@ -8,9 +8,8 @@ class Book extends Component {
   }
 
   render() {
-    const book = this.props
+    const book = this.props.book
     return (
-        <ol className="books-grid">
           <li key={book.id}>
             <div className="book">
               <div className="book-top">
@@ -29,7 +28,6 @@ class Book extends Component {
               <div className="book-authors">{book.authors.join(", ")}</div>
             </div>
           </li>
-        </ol>
     )
   }
 
